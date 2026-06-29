@@ -1,0 +1,129 @@
+# =========================
+# Dependencies
+# =========================
+node_modules/
+**/node_modules/
+
+# =========================
+# Build Outputs
+# =========================
+dist/
+build/
+.next/
+out/
+coverage/
+
+client/dist/
+server/dist/
+
+# =========================
+# Environment Variables
+# =========================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+client/.env
+server/.env
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# Runtime Files
+# =========================
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# =========================
+# Uploaded Files
+# =========================
+uploads/
+temp/
+tmp/
+
+# Keep folder structure
+!uploads/.gitkeep
+
+# =========================
+# Cache Files
+# =========================
+.cache/
+.parcel-cache/
+.eslintcache
+
+# =========================
+# Testing
+# =========================
+coverage/
+.nyc_output/
+
+# =========================
+# IDE
+# =========================
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# MongoDB
+# =========================
+*.mongodb
+mongodb-data/
+
+# =========================
+# Misc
+# =========================
+*.tgz
+*.gz
+*.zip
+*.rar
+
+# =========================
+# Generated Reports
+# =========================
+reports/
+docs/generated/
+
+# =========================
+# Sample Secret Configs
+# =========================
+config/secrets.json
+config/private.json
+
+# =========================
+# Vercel / Netlify
+# =========================
+.vercel/
+.netlify/
+
+# =========================
+# Jest
+# =========================
+jest-cache/
+
+# =========================
+# TypeScript (if added later)
+# =========================
+*.tsbuildinfo

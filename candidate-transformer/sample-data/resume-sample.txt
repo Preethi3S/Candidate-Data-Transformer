@@ -1,0 +1,10 @@
+Johnathan Doe
+john@gmail.com | +91 98765 43210
+5 years of experience building scalable web platforms.
+
+Skills: Core Java, ReactJS, NodeJS, MongoDB, Docker
+
+Software Engineer at Google Jan 2023 Present
+Backend Developer at Acme Labs Jan 2020 Dec 2022
+
+B.Tech from Delhi University 2020
