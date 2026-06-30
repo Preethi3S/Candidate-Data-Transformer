@@ -167,8 +167,7 @@ The application follows a modular data-processing architecture.
 
 # 🔄 Data Processing Workflow
 
-<img width="1612" height="1009" alt="diagram-export-30-06-2026-18_10_08" src="https://github.com/user-attachments/assets/f1e80adc-86a2-43dd-816d-7899c65d50c6" />
-
+<img width="1612" height="891" alt="diagram-export-30-06-2026-20_54_39" src="https://github.com/user-attachments/assets/e7f37c50-c9e9-4232-92b2-dc4ba53ade4e" />
 
 ### Step 1: Source Upload
 
