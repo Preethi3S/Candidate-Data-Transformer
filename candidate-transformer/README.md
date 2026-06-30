@@ -91,10 +91,16 @@ MongoDB is optional for local evaluation. If `MONGODB_URI` is unavailable, the A
 
 ## REST APIs
 
+- `POST /api/auth/signup`: create a recruiter account
+- `POST /api/auth/signin`: sign in and receive a bearer token
+- `GET /api/auth/me`: validate the current session
+- `POST /api/auth/logout`: end the client session
 - `POST /api/upload`: multipart upload for `csvFile`, `resumeFile`, and optional `configFile`
 - `GET /api/profile/:id`: fetch one stored candidate
 - `GET /api/profiles`: fetch all stored candidates
 - `POST /api/profile/:id/project`: rerun projection with a new runtime config
+
+Candidate APIs require an `Authorization: Bearer <token>` header. The React app handles this automatically after signup or sign in.
 
 ## Example Inputs
 
@@ -157,6 +163,7 @@ Projected output:
 
 The React dashboard includes:
 
+- Sign up, sign in, persistent session restore, and logout
 - CSV, resume, and projection-config upload cards
 - Processing pipeline status
 - Canonical profile viewer

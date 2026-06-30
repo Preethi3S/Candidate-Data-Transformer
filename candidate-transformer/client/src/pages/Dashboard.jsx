@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Upload, RefreshCw } from "lucide-react";
+import { LogOut, RefreshCw, Upload, UserRound } from "lucide-react";
 import { uploadCandidate } from "../services/api";
 import { FileUploadCard } from "../components/FileUploadCard";
 import { PipelineStatus } from "../components/PipelineStatus";
@@ -9,9 +9,11 @@ import { JsonViewer } from "../components/JsonViewer";
 import { LineagePanel } from "../components/LineagePanel";
 import { ConfidenceDashboard } from "../components/ConfidenceDashboard";
 import { formatDefaultProjectionConfig } from "../projection/configFormatter";
+import { useAuth } from "../hooks/useAuth";
 
 export function Dashboard() {
   const { register, handleSubmit, watch } = useForm();
+  const { user, logOut } = useAuth();
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -38,21 +40,38 @@ export function Dashboard() {
 
   return (
     <main className="mx-auto flex w-full max-w-7xl flex-col gap-5 px-4 py-5 sm:px-6 lg:px-8">
-      <header className="flex flex-wrap items-center justify-between gap-4 border-b border-ink/10 pb-4">
+      <header className="rounded-lg border border-ink/10 bg-white p-4 shadow-panel">
+        <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
+          <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-coral">Secure recruiter workspace</p>
           <h1 className="text-2xl font-semibold tracking-normal">Multi-Source Candidate Data Transformer</h1>
           <p className="mt-1 text-sm text-ink/60">Recruiting intelligence ingestion, normalization, provenance, and configurable projection.</p>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <button
-            className="inline-flex min-h-10 items-center gap-2 rounded-md bg-ink px-4 py-2 text-sm font-semibold text-white transition hover:bg-steel disabled:cursor-not-allowed disabled:opacity-60"
-            type="submit"
-            disabled={loading}
-          >
-            {loading ? <RefreshCw className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
-            Process
-          </button>
-        </form>
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="flex min-h-10 items-center gap-2 rounded-md border border-ink/10 bg-field px-3 py-2 text-sm">
+              <UserRound className="h-4 w-4 text-moss" />
+              <span className="font-semibold">{user?.name}</span>
+            </div>
+            <button
+              className="inline-flex min-h-10 items-center gap-2 rounded-md border border-ink/10 bg-white px-3 py-2 text-sm font-semibold text-ink transition hover:border-coral/50 hover:text-coral"
+              type="button"
+              onClick={logOut}
+            >
+              <LogOut className="h-4 w-4" />
+              Logout
+            </button>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <button
+                className="inline-flex min-h-10 items-center gap-2 rounded-md bg-ink px-4 py-2 text-sm font-semibold text-white transition hover:bg-steel disabled:cursor-not-allowed disabled:opacity-60"
+                type="submit"
+                disabled={loading}
+              >
+                {loading ? <RefreshCw className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
+                Process
+              </button>
+            </form>
+          </div>
+        </div>
       </header>
 
       <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 md:grid-cols-3">
