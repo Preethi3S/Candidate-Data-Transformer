@@ -17,34 +17,6 @@ The platform helps recruiters and hiring systems consolidate fragmented candidat
 
 ---
 
-# 📋 Table of Contents
-
-- Features
-- Multi-Source Data Ingestion
-- Identity Resolution
-- Resume Parsing
-- Conflict Resolution
-- Backfill Mechanism
-- Confidence Scoring
-- Provenance Tracking
-- Canonical Candidate Profile
-- System Architecture Overview
-- High-Level Architecture
-- Data Processing Workflow
-- Design Decisions & Reasoning
-- UI/UX Design
-- Tech Stack
-- Getting Started
-- Clone & Install
-- Environment Variables
-- Run Development Servers
-- Demo Video
-- Future Enhancements
-- License
-- Contact
-
----
-
 # ✨ Features
 
 ## 📥 Multi-Source Data Ingestion
