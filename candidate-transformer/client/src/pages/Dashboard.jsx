@@ -1,6 +1,6 @@
 ﻿import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import { LogOut, RefreshCw, Upload, UserRound } from "lucide-react";
+import { ChevronDown, LogOut, RefreshCw, Upload, UserRound } from "lucide-react";
 import { processDemoDataset, uploadCandidate } from "../services/api";
 import { FileUploadCard } from "../components/FileUploadCard";
 import { PipelineStatus } from "../components/PipelineStatus";
@@ -145,39 +145,77 @@ export function Dashboard() {
 
       <PipelineStatus active={loading} completed={Boolean(result)} steps={result?.pipeline} />
 
-      {validationErrors.length > 0 && (
-        <section className="rounded-lg border border-coral/30 bg-white p-4 shadow-panel dark:bg-[#1f252b]">
-          <h2 className="mb-2 text-base font-semibold text-ink dark:text-white">Validation Notes</h2>
-          <ul className="space-y-1 text-sm text-ink/70 dark:text-white/65">
-            {validationErrors.map((item, index) => <li key={`${item.message}-${index}`}>{item.source ? `${item.source}: ` : ""}{item.message || item.code}</li>)}
-          </ul>
-        </section>
-      )}
-
       {result && (
         <>
+          <section className="mx-auto grid w-full max-w-6xl gap-4 md:grid-cols-2">
+            <JsonViewer title="Projected Output" data={result.projectedProfile} />
+            <JsonViewer title="Canonical JSON" data={result.canonicalProfile} />
+          </section>
+
+          {validationErrors.length > 0 && (
+            <section className="rounded-lg border border-coral/30 bg-white p-4 shadow-panel dark:bg-[#1f252b]">
+              <h2 className="mb-2 text-base font-semibold text-ink dark:text-white">Validation Notes</h2>
+              <ul className="space-y-1 text-sm text-ink/70 dark:text-white/65">
+                {validationErrors.map((item, index) => <li key={`${item.message}-${index}`}>{item.source ? `${item.source}: ` : ""}{item.message || item.code}</li>)}
+              </ul>
+            </section>
+          )}
+
           <PremiumInsightsPanel premium={result.premium} />
-          <div className="grid gap-5 xl:grid-cols-[1.35fr_0.9fr]">
-            <div className="space-y-5">
-              <CanonicalProfile profile={result.canonicalProfile} />
-              <LineagePanel profile={result.canonicalProfile} conflicts={result.conflicts} />
-              <ConflictDashboard conflicts={result.conflicts} />
-              <ArchitectureVisualization />
-            </div>
-            <div className="space-y-5">
+
+          <CanonicalProfile profile={result.canonicalProfile} />
+
+          <div className="space-y-4">
+            <CollapsibleSection title="Candidate Lineage">
+              <LineagePanel profile={result.canonicalProfile} conflicts={result.conflicts} embedded />
+            </CollapsibleSection>
+
+            <div className="grid gap-4 lg:grid-cols-2">
               <ConfidenceDashboard confidence={result.confidence} />
               <SourceReliabilityDashboard reliability={result.premium?.sourceReliability} />
-              <SkillIntelligencePanel skills={result.premium?.skillIntelligence} />
-              <DataQualityWarnings warnings={result.premium?.warnings} />
-              <AuditTimeline auditTrail={result.premium?.auditTrail} />
-              <JsonViewer title="Projected Output" data={result.projectedProfile} />
-              <JsonViewer title="Canonical JSON" data={result.canonicalProfile} />
             </div>
+
+            <div className="grid gap-4 lg:grid-cols-2">
+              <CollapsibleSection title="Skill Intelligence">
+                <SkillIntelligencePanel skills={result.premium?.skillIntelligence} embedded />
+              </CollapsibleSection>
+              <CollapsibleSection title="Transformation Audit Trail">
+                <AuditTimeline auditTrail={result.premium?.auditTrail} embedded />
+              </CollapsibleSection>
+              
+            </div>
+
+            <div className="grid gap-4 lg:grid-cols-2">
+              <CollapsibleSection title="Conflict Resolution">
+                <ConflictDashboard conflicts={result.conflicts} embedded />
+              </CollapsibleSection>
+              <CollapsibleSection title="Data Quality Warnings">
+                <DataQualityWarnings warnings={result.premium?.warnings} embedded />
+              </CollapsibleSection>
+            </div>
+
+            <CollapsibleSection title="Architecture Flow">
+              <ArchitectureVisualization embedded />
+            </CollapsibleSection>
           </div>
         </>
       )}
       </div>
     </main>
+  );
+}
+
+function CollapsibleSection({ title, children, defaultOpen = false }) {
+  return (
+    <details className="group overflow-hidden rounded-lg border border-ink/10 bg-white shadow-panel dark:border-white/10 dark:bg-[#1f252b]" open={defaultOpen}>
+      <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-base font-semibold text-ink transition hover:bg-field dark:text-white dark:hover:bg-[#15191d]">
+        <span>{title}</span>
+        <ChevronDown className="h-5 w-5 text-ink/55 transition group-open:rotate-180 dark:text-white/55" />
+      </summary>
+      <div className="border-t border-ink/10 p-3 dark:border-white/10">
+        {children}
+      </div>
+    </details>
   );
 }
 
@@ -193,4 +231,3 @@ function SourceTextArea({ label, placeholder, registration }) {
     </label>
   );
 }
-

@@ -40,14 +40,10 @@ export function PremiumInsightsPanel({ premium }) {
   );
 }
 
-export function ConflictDashboard({ conflicts = [] }) {
+export function ConflictDashboard({ conflicts = [], embedded = false }) {
   return (
-    <section className="rounded-lg border border-ink/10 bg-white p-4 shadow-panel dark:border-white/10 dark:bg-[#1f252b]">
-      <div className="mb-4 flex items-center justify-between gap-3">
-        <div>
-          <h2 className="text-base font-semibold text-ink dark:text-white">Conflict Resolution</h2>
-          <p className="text-sm text-ink/55 dark:text-white/55">Competing source values and deterministic winner selection.</p>
-        </div>
+    <section className={embedded ? "" : "rounded-lg border border-ink/10 bg-white p-4 shadow-panel dark:border-white/10 dark:bg-[#1f252b]"}>
+      <div className={`${embedded ? "mb-3" : "mb-4"} flex items-center justify-end gap-3`}>
         <span className="rounded-md bg-field px-2 py-1 text-xs font-semibold text-ink dark:bg-[#15191d] dark:text-white">{conflicts.length} conflicts</span>
       </div>
       {conflicts.length ? (
@@ -89,11 +85,10 @@ export function SourceReliabilityDashboard({ reliability = {} }) {
   );
 }
 
-export function SkillIntelligencePanel({ skills = [] }) {
+export function SkillIntelligencePanel({ skills = [], embedded = false }) {
   return (
-    <section className="rounded-lg border border-ink/10 bg-white p-4 shadow-panel dark:border-white/10 dark:bg-[#1f252b]">
-      <h2 className="mb-4 text-base font-semibold text-ink dark:text-white">Skill Intelligence</h2>
-      <div className="space-y-3">
+    <section className={embedded ? "" : "rounded-lg border border-ink/10 bg-white p-4 shadow-panel dark:border-white/10 dark:bg-[#1f252b]"}>
+      <div className="space-y-2">
         {skills.length ? skills.map((skill) => (
           <div key={skill.canonical_skill} className="rounded-md border border-ink/10 bg-field p-3 dark:border-white/10 dark:bg-[#15191d]">
             <div className="mb-2 flex items-center justify-between gap-3"><span className="font-semibold text-ink dark:text-white">{skill.canonical_skill}</span><span className="text-sm text-moss">{Math.round(skill.confidence * 100)}%</span></div>
@@ -106,15 +101,14 @@ export function SkillIntelligencePanel({ skills = [] }) {
   );
 }
 
-export function AuditTimeline({ auditTrail = [] }) {
+export function AuditTimeline({ auditTrail = [], embedded = false }) {
   return (
-    <section className="rounded-lg border border-ink/10 bg-white p-4 shadow-panel dark:border-white/10 dark:bg-[#1f252b]">
-      <h2 className="mb-4 text-base font-semibold text-ink dark:text-white">Transformation Audit Trail</h2>
-      <div className="space-y-3">
+    <section className={embedded ? "" : "rounded-lg border border-ink/10 bg-white p-4 shadow-panel dark:border-white/10 dark:bg-[#1f252b]"}>
+      <div className="space-y-2">
         {auditTrail.map((entry) => (
           <div key={entry.step} className="flex gap-3">
             <div className={`mt-1 h-3 w-3 rounded-full ${entry.status === "success" ? "bg-moss" : "bg-coral"}`} />
-            <div className="min-w-0 flex-1 border-b border-ink/10 pb-3 dark:border-white/10">
+            <div className="min-w-0 flex-1 border-b border-ink/10 pb-2 dark:border-white/10">
               <div className="flex flex-wrap justify-between gap-2"><span className="font-semibold text-ink dark:text-white">{entry.step}</span><span className="text-xs text-ink/50 dark:text-white/45">{new Date(entry.timestamp).toLocaleTimeString()}</span></div>
               <p className="text-sm capitalize text-ink/60 dark:text-white/60">{entry.status}{entry.notes ? ` · ${entry.notes}` : ""}</p>
             </div>
@@ -125,10 +119,9 @@ export function AuditTimeline({ auditTrail = [] }) {
   );
 }
 
-export function DataQualityWarnings({ warnings = [] }) {
+export function DataQualityWarnings({ warnings = [], embedded = false }) {
   return (
-    <section className="rounded-lg border border-ink/10 bg-white p-4 shadow-panel dark:border-white/10 dark:bg-[#1f252b]">
-      <h2 className="mb-4 text-base font-semibold text-ink dark:text-white">Data Quality Warnings</h2>
+    <section className={embedded ? "" : "rounded-lg border border-ink/10 bg-white p-4 shadow-panel dark:border-white/10 dark:bg-[#1f252b]"}>
       <div className="flex flex-wrap gap-2">
         {warnings.length ? warnings.map((warning, index) => (
           <span key={`${warning.code}-${index}`} className="inline-flex items-center gap-2 rounded-md border border-coral/25 bg-coral/10 px-3 py-2 text-sm font-semibold text-ink dark:text-white">
@@ -141,11 +134,11 @@ export function DataQualityWarnings({ warnings = [] }) {
   );
 }
 
-export function ArchitectureVisualization() {
+export function ArchitectureVisualization({ embedded = false }) {
   const steps = ["Upload", "Parse", "Normalize", "Merge", "Conflict Resolver", "Confidence", "Projection", "Complete"];
   return (
-    <section className="rounded-lg border border-ink/10 bg-white p-4 shadow-panel dark:border-white/10 dark:bg-[#1f252b]">
-      <div className="mb-4 flex items-center gap-2"><Network className="h-5 w-5 text-coral" /><h2 className="text-base font-semibold text-ink dark:text-white">Architecture Flow</h2></div>
+    <section className={embedded ? "" : "rounded-lg border border-ink/10 bg-white p-4 shadow-panel dark:border-white/10 dark:bg-[#1f252b]"}>
+      {!embedded && <div className="mb-4 flex items-center gap-2"><Network className="h-5 w-5 text-coral" /><h2 className="text-base font-semibold text-ink dark:text-white">Architecture Flow</h2></div>}
       <div className="grid gap-2 sm:grid-cols-4">
         {steps.map((step, index) => <div key={step} className="rounded-md border border-ink/10 bg-field p-3 text-sm font-semibold text-ink dark:border-white/10 dark:bg-[#15191d] dark:text-white">{index + 1}. {step}</div>)}
       </div>
