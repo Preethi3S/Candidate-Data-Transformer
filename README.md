@@ -1,5 +1,8 @@
 # 🚀 Multi-Source Candidate Data Transformer
 
+<img width="1563" height="850" alt="image" src="https://github.com/user-attachments/assets/bc8c5f59-4388-458c-99c2-9e7c8a9727cb" />
+
+
 A MERN-based candidate data transformation platform that ingests information from multiple sources, resolves identities, removes duplicates, handles conflicting data, tracks provenance, and generates a unified canonical candidate profile.
 
 The platform helps recruiters and hiring systems consolidate fragmented candidate information from resumes, ATS systems, recruiter spreadsheets, LinkedIn profiles, and GitHub profiles into a single reliable candidate record.
@@ -185,53 +188,15 @@ After processing, the platform generates a unified candidate profile containing:
 
 The application follows a modular data-processing architecture.
 
----
 
-## High-Level Architecture
-
-```text
-Input Sources
-     ↓
-Source Validation
-     ↓
-Identity Resolution
-     ↓
-Source Parsing
-     ↓
-Field Extraction
-     ↓
-Field Validation
-     ↓
-Normalization
-     ↓
-Deduplication
-     ↓
-Merge Engine
-     ↓
-Confidence & Provenance
-     ↓
-Canonical Profile
-     ↓
-Projection Engine
-     ↓
-Final Output
-```
-
----
-
-## Architecture Diagram
-
-Add Architecture Screenshot Here
-
-```md
-![Architecture](./screenshots/architecture.png)
-```
+<img width="2070" height="799" alt="diagram-export-30-06-2026-18_54_07" src="https://github.com/user-attachments/assets/912b0b81-0496-4d20-a1fd-78d5ec684a45" />
 
 ---
 
 # 🔄 Data Processing Workflow
 
-<img width="3224" height="2018" alt="image" src="https://github.com/user-attachments/assets/e1247496-008b-423b-863e-6891801a166e" />
+<img width="1612" height="1009" alt="diagram-export-30-06-2026-18_10_08" src="https://github.com/user-attachments/assets/f1e80adc-86a2-43dd-816d-7899c65d50c6" />
+
 
 ### Step 1: Source Upload
 
@@ -303,27 +268,18 @@ The application provides an intuitive interface for:
 
 ### Dashboard
 
-```md
-![Dashboard](./screenshots/dashboard.png)
-```
+<img width="1608" height="730" alt="image" src="https://github.com/user-attachments/assets/cdb74350-52d8-4924-a4fc-6672a2b6931b" />
+
 
 ### Candidate Profile
 
-```md
-![Profile](./screenshots/profile.png)
-```
+<img width="1606" height="876" alt="image" src="https://github.com/user-attachments/assets/dff5dfdd-9a9c-4f16-a48c-fafcedb45826" />
 
-### Provenance Tracking
-
-```md
-![Provenance](./screenshots/provenance.png)
-```
 
 ### Conflict Resolution
 
-```md
-![Conflict Resolution](./screenshots/conflicts.png)
-```
+<img width="1550" height="376" alt="image" src="https://github.com/user-attachments/assets/bceee786-c210-4073-ba45-92056f4d7aca" />
+
 
 ---
 
@@ -454,12 +410,8 @@ npm run dev
 
 ---
 
-## 5. Open Browser
+## 5. Video
 
-
-depending on your frontend configuration.
-
----
 
 # 🎥 Demo Video
 
