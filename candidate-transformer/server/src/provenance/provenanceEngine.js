@@ -6,6 +6,7 @@ class ProvenanceEngine {
       method: entry.method,
       confidence: entry.confidence,
       value: entry.value,
+      original_value: entry.original_value,
       notes: entry.notes || undefined,
       timestamp: entry.timestamp || new Date().toISOString()
     };

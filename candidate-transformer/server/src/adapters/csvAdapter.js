@@ -3,12 +3,12 @@ const { CSVParserService } = require("../parsers/csvParser");
 
 class CSVAdapter extends SourceAdapter {
   constructor(parser = new CSVParserService()) {
-    super({ sourceType: "CSV", sourceName: "recruiter.csv", priority: 3, baseConfidence: 0.95 });
+    super({ sourceType: "CSV", sourceName: "recruiter.csv", priority: 4, baseConfidence: 0.9 });
     this.parser = parser;
   }
 
   async parse(file) {
-    if (!file) return { records: [], errors: [{ source: "CSV", message: "CSV file missing" }] };
+    if (!file) return { records: [], errors: [] };
     const parsed = await this.parser.parse(file.buffer);
     const records = parsed.rows.map((row, index) => ({
       sourceType: this.sourceType,

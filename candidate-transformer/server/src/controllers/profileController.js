@@ -1,3 +1,5 @@
+﻿const fs = require("fs");
+const path = require("path");
 const { ProcessingPipeline } = require("../services/processingPipeline");
 const { CandidateRepository } = require("../services/candidateRepository");
 const { ProjectionEngine } = require("../projection/projectionEngine");
@@ -10,11 +12,29 @@ const projectionEngine = new ProjectionEngine();
 async function uploadAndProcess(req, res, next) {
   try {
     const configFile = req.files?.configFile?.[0];
-    const processed = await pipeline.process(req.files || {}, configFile);
+    const previousCandidates = await repository.findAll();
+    const processed = await pipeline.process(req.files || {}, configFile, { previousCandidates, body: req.body || {} });
     await repository.save(processed);
     res.status(201).json(processed);
   } catch (error) {
     next(error);
+  }
+}
+
+async function processDemoDataset(req, res, next) {
+  try {
+    const sampleRoot = path.resolve(__dirname, "../../../sample-data");
+    const files = {
+      csvFile: [{ originalname: "recruiter-export.csv", buffer: fs.readFileSync(path.join(sampleRoot, "recruiter-export.csv")) }],
+      resumeFile: [{ originalname: "resume-sample.txt", buffer: fs.readFileSync(path.join(sampleRoot, "resume-sample.txt")) }]
+    };
+    const configFile = { originalname: "projection-config.json", buffer: fs.readFileSync(path.join(sampleRoot, "projection-config.json")) };
+    const previousCandidates = await repository.findAll();
+    const processed = await pipeline.process(files, configFile, { previousCandidates });
+    await repository.save(processed);
+    return res.status(201).json(processed);
+  } catch (error) {
+    return next(error);
   }
 }
 
@@ -55,4 +75,4 @@ async function rerunProjection(req, res, next) {
   }
 }
 
-module.exports = { uploadAndProcess, getCandidate, getAllCandidates, rerunProjection };
+module.exports = { uploadAndProcess, processDemoDataset, getCandidate, getAllCandidates, rerunProjection };

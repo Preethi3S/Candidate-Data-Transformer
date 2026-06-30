@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+﻿const mongoose = require("mongoose");
 
 const CandidateSchema = new mongoose.Schema(
   {
@@ -7,9 +7,12 @@ const CandidateSchema = new mongoose.Schema(
     projected_profiles: { type: Array, default: [] },
     provenance: { type: Array, default: [] },
     confidence: { type: Object, default: {} },
-    conflicts: { type: Array, default: [] }
+    conflicts: { type: Array, default: [] },
+    premium: { type: Object, default: {} }
   },
   { timestamps: true }
 );
 
 module.exports = mongoose.model("Candidate", CandidateSchema);
+
+

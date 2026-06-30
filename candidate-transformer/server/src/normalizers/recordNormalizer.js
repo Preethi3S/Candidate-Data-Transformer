@@ -27,7 +27,7 @@ class RecordNormalizer {
     normalized.fields.skills = (normalized.fields.skills || [])
       .map((entry) => ({
         ...entry,
-        raw: entry.value,
+        original_value: entry.original_value || entry.value,
         value: this.skillNormalizer.normalize(entry.value),
         notes: entry.value === this.skillNormalizer.normalize(entry.value) ? entry.notes : `Canonicalized from ${entry.value}`
       }))

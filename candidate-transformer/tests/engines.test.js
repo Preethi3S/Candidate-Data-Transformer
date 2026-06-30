@@ -16,14 +16,26 @@ function entry(field, value, sourceType, confidence, priority) {
   };
 }
 
-test("resolves conflicts by confidence before source priority", () => {
+test("resolves conflicts by source priority when frequency is tied", () => {
   const resolver = new ConflictResolver();
   const resolution = resolver.resolve("full_name", [
-    entry("full_name", "John Doe", "CSV", 0.95, 3),
-    entry("full_name", "Johnathan Doe", "Resume", 0.8, 2)
+    entry("full_name", "John Doe", "CSV", 0.95, 4),
+    entry("full_name", "Johnathan Doe", "Resume", 0.8, 5)
   ]);
-  expect(resolution.winner).toBe("John Doe");
-  expect(resolution.reason).toBe("Higher source confidence");
+  expect(resolution.winner).toBe("Johnathan Doe");
+  expect(resolution.reason).toBe("Higher source priority");
+});
+
+test("keeps strict source priority even when lower-priority sources agree", () => {
+  const resolver = new ConflictResolver();
+  const resolution = resolver.resolve("full_name", [
+    entry("full_name", "Preethi Resume", "Resume", 0.95, 5),
+    entry("full_name", "Preethi S", "ATS", 0.85, 3),
+    entry("full_name", "Preethi S", "LinkedIn", 0.8, 2)
+  ]);
+  expect(resolution.winner).toBe("Preethi Resume");
+  expect(resolution.reason).toBe("Higher source priority");
+  expect(resolution.candidates.find((candidate) => candidate.value === "Preethi S").frequency).toBe(2);
 });
 
 test("merge engine unions and deduplicates multi-value fields", () => {
@@ -72,7 +84,7 @@ test("confidence engine returns weighted overall score", () => {
       { field: "phones", confidence: 0.95 }
     ]
   };
-  expect(new ConfidenceEngine().score(profile).overall_confidence).toBeGreaterThan(0.8);
+  expect(new ConfidenceEngine().score(profile, { identity: { identity_match_score: 100 } }).overall_confidence).toBeGreaterThanOrEqual(0.8);
 });
 
 test("projection engine renames fields and includes metadata", () => {

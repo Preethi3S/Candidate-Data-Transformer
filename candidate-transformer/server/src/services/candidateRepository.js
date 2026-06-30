@@ -1,4 +1,4 @@
-const Candidate = require("../models/Candidate");
+﻿const Candidate = require("../models/Candidate");
 const { isMongoConnected } = require("../config/db");
 
 const memoryStore = new Map();
@@ -11,7 +11,8 @@ class CandidateRepository {
       projected_profiles: [processed.projectedProfile],
       provenance: processed.canonicalProfile.provenance,
       confidence: processed.confidence,
-      conflicts: processed.conflicts
+      conflicts: processed.conflicts,
+      premium: processed.premium
     };
 
     if (isMongoConnected()) {

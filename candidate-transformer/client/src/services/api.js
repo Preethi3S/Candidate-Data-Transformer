@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api"
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:8000/api"
 });
 
 export function setAuthToken(token) {
@@ -32,14 +32,25 @@ export async function logoutSession() {
   return data;
 }
 
-export async function uploadCandidate({ csvFile, resumeFile, configFile }) {
+export async function uploadCandidate({ csvFile, resumeFile, configFile, atsFile, linkedinFile, githubFile, atsJson, linkedinJson, githubJson }) {
   const formData = new FormData();
   if (csvFile) formData.append("csvFile", csvFile);
   if (resumeFile) formData.append("resumeFile", resumeFile);
+  if (atsFile) formData.append("atsFile", atsFile);
+  if (linkedinFile) formData.append("linkedinFile", linkedinFile);
+  if (githubFile) formData.append("githubFile", githubFile);
   if (configFile) formData.append("configFile", configFile);
+  if (atsJson) formData.append("atsJson", atsJson);
+  if (linkedinJson) formData.append("linkedinJson", linkedinJson);
+  if (githubJson) formData.append("githubJson", githubJson);
   const { data } = await api.post("/upload", formData, {
     headers: { "Content-Type": "multipart/form-data" }
   });
+  return data;
+}
+
+export async function processDemoDataset() {
+  const { data } = await api.post("/demo/process");
   return data;
 }
 
@@ -54,3 +65,5 @@ export async function rerunProjection(candidateId, config) {
 }
 
 export { api };
+
+
