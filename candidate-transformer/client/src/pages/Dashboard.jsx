@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { LogOut, RefreshCw, Upload, UserRound } from "lucide-react";
 import { processDemoDataset, uploadCandidate } from "../services/api";
@@ -112,7 +112,7 @@ export function Dashboard() {
             <form onSubmit={handleSubmit(onSubmit)}>
               <button className="inline-flex min-h-10 items-center gap-2 rounded-md bg-ink px-4 py-2 text-sm font-semibold text-white transition hover:bg-steel disabled:cursor-not-allowed disabled:opacity-60" type="submit" disabled={loading}>
                 {loading ? <RefreshCw className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
-                Process
+                Submit
               </button>
             </form>
           </div>
@@ -129,12 +129,12 @@ export function Dashboard() {
         <FileUploadCard label="GitHub JSON" accept=".json,application/json" registration={register("githubFile")} value={watched.githubFile} />
         <FileUploadCard label="Projection Config" accept=".json,application/json" registration={register("configFile")} value={watched.configFile} />
       </form>
-
+{/* 
       <section className="grid gap-4 rounded-lg border border-ink/10 bg-white p-4 shadow-panel dark:border-white/10 dark:bg-[#1f252b] md:grid-cols-2">
         <SourceTextArea label="ATS JSON" placeholder='{"candidateName":"Preethi S","email":"preethi@gmail.com","yearsExp":2}' registration={register("atsJson")} />
         <SourceTextArea label="LinkedIn Profile JSON" placeholder='{"name":"Preethi S","headline":"Software Engineer","skills":["Java","React"]}' registration={register("linkedinJson")} />
         <SourceTextArea label="GitHub Profile JSON" placeholder='{"github_url":"https://github.com/preethi3s","languages":["JavaScript","TypeScript"]}' registration={register("githubJson")} />
-      </section>
+      </section> */}
 
       {error && <div className="rounded-md border border-coral/30 bg-coral/10 px-4 py-3 text-sm text-ink dark:text-white">{error}</div>}
 
