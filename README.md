@@ -1,3 +1,5 @@
+
+
 # 🚀 Multi-Source Candidate Data Transformer
 
 A MERN-based candidate data transformation platform that ingests information from multiple sources, resolves identities, removes duplicates, handles conflicting data, tracks provenance, and generates a unified canonical candidate profile.
@@ -18,9 +20,7 @@ The platform helps recruiters and hiring systems consolidate fragmented candidat
 
 Watch the complete project walkthrough:
 
-📹 Add Video Link Here
-
----
+https://github.com/user-attachments/assets/54ce633e-766a-4bde-a181-096f578898a1
 
 
 # 🏗️ System Architecture Overview
