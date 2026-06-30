@@ -1,6 +1,6 @@
 
 
-# 🚀 Multi-Source Candidate Data Transformer
+# Multi-Source Candidate Data Transformer
 
 A MERN-based candidate data transformation platform that ingests information from multiple sources, resolves identities, removes duplicates, handles conflicting data, tracks provenance, and generates a unified canonical candidate profile.
 
@@ -367,7 +367,7 @@ MONGODB_URI=mongodbconfiguration
 Create a `.env` file inside the client directory:
 
 ```env
-VITE_API_URL="backendurl"
+VITE_API_URL=backendurl
 ```
 
 ---
