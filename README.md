@@ -1,8 +1,5 @@
 # 🚀 Multi-Source Candidate Data Transformer
 
-<img width="1563" height="850" alt="image" src="https://github.com/user-attachments/assets/bc8c5f59-4388-458c-99c2-9e7c8a9727cb" />
-
-
 A MERN-based candidate data transformation platform that ingests information from multiple sources, resolves identities, removes duplicates, handles conflicting data, tracks provenance, and generates a unified canonical candidate profile.
 
 The platform helps recruiters and hiring systems consolidate fragmented candidate information from resumes, ATS systems, recruiter spreadsheets, LinkedIn profiles, and GitHub profiles into a single reliable candidate record.
@@ -14,6 +11,82 @@ The platform helps recruiters and hiring systems consolidate fragmented candidat
 🔗 Live Application:
 
 [https://candidate-data-transformer-1.onrender.com/]
+
+---
+
+# 🎥 Demo Video
+
+Watch the complete project walkthrough:
+
+📹 Add Video Link Here
+
+---
+
+
+# 🏗️ System Architecture Overview
+
+The application follows a modular data-processing architecture.
+
+
+<img width="2070" height="799" alt="diagram-export-30-06-2026-18_54_07" src="https://github.com/user-attachments/assets/912b0b81-0496-4d20-a1fd-78d5ec684a45" />
+
+---
+
+# 🔄 Data Processing Workflow
+
+<img width="1612" height="891" alt="diagram-export-30-06-2026-20_54_39" src="https://github.com/user-attachments/assets/e7f37c50-c9e9-4232-92b2-dc4ba53ade4e" />
+
+### Step 1: Source Upload
+
+Users upload candidate information from one or more supported sources.
+
+### Step 2: Source Validation
+
+Uploaded files are validated for structure and data integrity.
+
+### Step 3: Identity Resolution
+
+Matching candidate records are grouped together.
+
+### Step 4: Field Extraction
+
+Candidate information is extracted from each source.
+
+### Step 5: Normalization
+
+Data is standardized into a common schema.
+
+### Step 6: Deduplication
+
+Duplicate entries are removed.
+
+### Step 7: Merge Engine
+
+Conflicting values are resolved using source-priority rules.
+
+### Step 8: Confidence & Provenance
+
+Confidence scores and source metadata are attached.
+
+### Step 9: Canonical Profile Generation
+
+A unified candidate profile is generated.
+
+---
+
+# ⚙️ Source Priority Strategy
+
+The system follows a priority-based merge strategy.
+
+| Source | Priority |
+|----------|----------|
+| Resume | 5 |
+| Recruiter CSV | 4 |
+| ATS | 3 |
+| LinkedIn | 2 |
+| GitHub | 1 |
+
+Higher-priority sources override lower-priority sources.
 
 ---
 
@@ -80,7 +153,7 @@ Example:
 
 Resume → Preethi S
 
-CSV → Preethi Selvaraj
+CSV → Preethi Sivasubramaniyam
 
 ATS → Preethi S
 
@@ -153,73 +226,6 @@ After processing, the platform generates a unified candidate profile containing:
 - Confidence Scores
 - Provenance Information
 - Source Metadata
-
----
-
-# 🏗️ System Architecture Overview
-
-The application follows a modular data-processing architecture.
-
-
-<img width="2070" height="799" alt="diagram-export-30-06-2026-18_54_07" src="https://github.com/user-attachments/assets/912b0b81-0496-4d20-a1fd-78d5ec684a45" />
-
----
-
-# 🔄 Data Processing Workflow
-
-<img width="1612" height="891" alt="diagram-export-30-06-2026-20_54_39" src="https://github.com/user-attachments/assets/e7f37c50-c9e9-4232-92b2-dc4ba53ade4e" />
-
-### Step 1: Source Upload
-
-Users upload candidate information from one or more supported sources.
-
-### Step 2: Source Validation
-
-Uploaded files are validated for structure and data integrity.
-
-### Step 3: Identity Resolution
-
-Matching candidate records are grouped together.
-
-### Step 4: Field Extraction
-
-Candidate information is extracted from each source.
-
-### Step 5: Normalization
-
-Data is standardized into a common schema.
-
-### Step 6: Deduplication
-
-Duplicate entries are removed.
-
-### Step 7: Merge Engine
-
-Conflicting values are resolved using source-priority rules.
-
-### Step 8: Confidence & Provenance
-
-Confidence scores and source metadata are attached.
-
-### Step 9: Canonical Profile Generation
-
-A unified candidate profile is generated.
-
----
-
-# ⚙️ Source Priority Strategy
-
-The system follows a priority-based merge strategy.
-
-| Source | Priority |
-|----------|----------|
-| Resume | 5 |
-| Recruiter CSV | 4 |
-| ATS | 3 |
-| LinkedIn | 2 |
-| GitHub | 1 |
-
-Higher-priority sources override lower-priority sources.
 
 ---
 
@@ -358,6 +364,11 @@ PORT=yourport
 
 MONGODB_URI=mongodbconfiguration
 ```
+Create a `.env` file inside the client directory:
+
+```env
+VITE_API_URL="backendurl"
+```
 
 ---
 
@@ -381,26 +392,8 @@ npm run dev
 
 ---
 
-## 5. Video
 
 
-# 🎥 Demo Video
-
-Watch the complete project walkthrough:
-
-📹 Add Video Link Here
-
-The demo includes:
-
-- Source Upload
-- Resume Parsing
-- Identity Resolution
-- Merge Engine
-- Conflict Resolution
-- Provenance Tracking
-- Canonical Profile Generation
-
----
 
 # 📄 Sample Input Files
 
@@ -411,27 +404,6 @@ The repository includes sample data files:
 - linkedin-data.json
 - github-data.json
 - resume.pdf
-
----
-
-# 🔮 Future Enhancements
-
-- OCR Support
-- AI-Based Resume Understanding
-- Advanced Entity Resolution
-- Skill Taxonomy Mapping
-- ATS Integrations
-- Real-Time Candidate Synchronization
-- Analytics Dashboard
-- Bulk Candidate Processing
-
----
-
-# 📜 License
-
-This project is licensed under the MIT License.
-
-See the LICENSE file for details.
 
 ---
 
